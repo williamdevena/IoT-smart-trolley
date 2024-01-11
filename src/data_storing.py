@@ -5,6 +5,7 @@ remotely into a MongoDB database
 
 import logging
 import os
+from typing import Dict, List, Tuple
 
 #import pandas as pd
 import pymongo
@@ -12,7 +13,10 @@ import pymongo
 from src import auth, costants
 
 
-def store_dict_into_mongodb(cluster_name, database_name, collection_name, data_dict):
+def store_dict_into_mongodb(cluster_name: str,
+                            database_name: str,
+                            collection_name: str,
+                            data_dict: Dict) -> None:
     """
     Inserts a pandas dataframe into a MongoDb database in the form of a collection
 
@@ -27,21 +31,25 @@ def store_dict_into_mongodb(cluster_name, database_name, collection_name, data_d
     """
     data_dict = [data_dict]
     store_collection_into_db(
-        cluster_name=cluster_name, database_name=database_name, collection_name=collection_name, data=data_dict
+        cluster_name=cluster_name, database_name=database_name,
+        collection_name=collection_name, data=data_dict
     )
 
 
-def store_collection_into_db(
-    cluster_name, database_name, collection_name, data
-):
+def store_collection_into_db(cluster_name: str,
+                             database_name: str,
+                             collection_name: str,
+                             data: List[Dict]) -> None:
     """
-    Inserts a list of MongoDB documents (dictionaries) into a specific collection of a database of a cluster.
+    Inserts a list of MongoDB documents (dictionaries) into a specific collection of
+    a database of a cluster.
 
     Args:
         - cluster_name (str): Name of the cluster
         - database_name (str): Name of the database
         - collection_name (str): Name of the collection
-        - data (List): List of dictionaries, where every dictionary represents a row (document) in the collection
+        - data (List): List of dictionaries, where every dictionary represents a row
+        (document) in the collection
 
     Returns:
         - None
@@ -57,12 +65,11 @@ def store_collection_into_db(
         f"- STORED '{collection_name}' REMOTELY IN THE {database_name} DATABASE")
 
 
-def connect_cluster_mongodb(cluster_name, username, password):
+def connect_cluster_mongodb(username: str, password: str) -> pymongo.MongoClient:
     """
     Opens a connection with a MongoDB cluster
 
     Args:
-        - cluster_name (str): name of the cluster
         - username (str): username used ofr authentication
         - password (str): password used for authentication
 
@@ -75,7 +82,8 @@ def connect_cluster_mongodb(cluster_name, username, password):
     return client
 
 
-def connect_database(client, database_name):
+def connect_database(client: pymongo.MongoClient,
+                     database_name: str) -> pymongo.database.Database:
     """
     Returns a specific database of a MongoDB cluster
 
@@ -96,7 +104,8 @@ def connect_database(client, database_name):
     return database
 
 
-def connect_collection(database, collection_name):
+def connect_collection(database: pymongo.database.Database,
+                       collection_name: str) -> Tuple[pymongo.collection.Collection, bool]:
     """
     Returns a specific collection of a MongoDB database
 

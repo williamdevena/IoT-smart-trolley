@@ -5,7 +5,6 @@ def send_restart_command() -> None:
     """
     Publishes a STOP message on the MQTT broker, that is going
     to be read by the Arduino.
-
     """
     client_id = "back-end"
     endpoint = "a1o1h9paav6wpy-ats.iot.eu-west-2.amazonaws.com"

@@ -2,11 +2,11 @@
 This module contains the functions used to acquire data both locally and remotely
 """
 
-import json
 import logging
-from datetime import datetime
+from typing import Dict, List, Tuple
 
 import pandas as pd
+import pymongo
 
 from src import auth, costants, data_storing
 
@@ -17,7 +17,8 @@ from src import auth, costants, data_storing
 
 
 
-def get_product_info(data):
+
+def get_product_info(data: List[Dict]) -> Tuple[str, float]:
     """
     Extracts the needed product information from the data
     returned by the MongoDB database.
@@ -37,7 +38,7 @@ def get_product_info(data):
     return name, price
 
 
-def get_from_products(condition_product={}):
+def get_from_products(condition_product: Dict = {}) -> List[Dict]:
     """
     Querys the MongoDB database for a certain product.
 
@@ -63,13 +64,13 @@ def get_from_products(condition_product={}):
     return data
 
 
-def acquire_from_database():
+def acquire_from_database() -> List[Dict]:
     """
     Acquires all the data (covid data, stock data, technical data, ...)
     from the MongoDB database.
 
     Returns:
-        - data (List) : contains all the data of the data acquisition stage
+        - data (List[Dict]) : contains all the data of the data acquisition stage
         in the form of pd.Dataframe(s)
     """
     database = costants.DATABASE_NAME
@@ -91,7 +92,11 @@ def acquire_from_database():
 
 
 
-def read_mongodb_collection(cluster_name, database_name, collection_name, condition={}, projection={}):
+def read_mongodb_collection(cluster_name: str,
+                            database_name: str,
+                            collection_name: str,
+                            condition: Dict = {},
+                            projection: Dict = {}) -> pymongo.cursor.Cursor:
     """
     Reads from a MongoDB database a certain collection and if given querys with certain conditions.
 
