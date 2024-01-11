@@ -1,7 +1,7 @@
 from src import mqtt_comm
 
 
-def send_restart_command():
+def send_restart_command() -> None:
     """
     Publishes a STOP message on the MQTT broker, that is going
     to be read by the Arduino.

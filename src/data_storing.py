@@ -26,7 +26,6 @@ def store_dict_into_mongodb(cluster_name, database_name, collection_name, data_d
     Returns: None
     """
     data_dict = [data_dict]
-    print(data_dict)
     store_collection_into_db(
         cluster_name=cluster_name, database_name=database_name, collection_name=collection_name, data=data_dict
     )
@@ -53,7 +52,6 @@ def store_collection_into_db(
     database = connect_database(client, database_name)
     collection, collection_already_exists = connect_collection(
         database, collection_name)
-    print(data)
     collection.insert_many(data)
     logging.info(
         f"- STORED '{collection_name}' REMOTELY IN THE {database_name} DATABASE")
@@ -71,12 +69,8 @@ def connect_cluster_mongodb(cluster_name, username, password):
     Returns:
         - client (MongoClient): client we use to comunicate with the database
     """
-    #connection_string = f"mongodb+srv://{username}:{password}@{cluster_name}.bhcapcy.mongodb.net/?retryWrites=true&w=majority"
     connection_string = f"mongodb://{username}:{password}@ac-sh3a7ys-shard-00-00.rjmwtmn.mongodb.net:27017,ac-sh3a7ys-shard-00-01.rjmwtmn.mongodb.net:27017,ac-sh3a7ys-shard-00-02.rjmwtmn.mongodb.net:27017/?ssl=true&replicaSet=atlas-n4ij5c-shard-0&authSource=admin&retryWrites=true&w=majority"
-    #mongodb://<username>:<password>@ac-sh3a7ys-shard-00-00.rjmwtmn.mongodb.net:27017,ac-sh3a7ys-shard-00-01.rjmwtmn.mongodb.net:27017,ac-sh3a7ys-shard-00-02.rjmwtmn.mongodb.net:27017/?ssl=true&replicaSet=atlas-n4ij5c-shard-0&authSource=admin&retryWrites=true&w=majority
-    # print(connection_string)
     client = pymongo.MongoClient(connection_string)
-    # logging.info(f"\n- Connected to '{cluster_name}' MongoDB cluster.")
 
     return client
 

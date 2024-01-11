@@ -73,7 +73,6 @@ def handle_checkout(message, aws_client):
     """
 
     checkout_dict = parse_checkout_string(message)
-    #data_dict = {'name':'Pizza', 'code':'4B00B82BC31B','price':'5.99'}
     data_storing.store_dict_into_mongodb(costants.CLUSTER_NAME,
                                         costants.DATABASE_NAME,
                                         costants.COLLECTION_CHECKOUTS,
@@ -119,8 +118,7 @@ def handle_product_scanned(message, aws_client):
     print(f"Topic: {message.topic}")
     print(f"Message: {message_string}\n")
     print(message_string)
-    # data_dict = {'name': 'Bread', 'code': message_string, 'price':'2.99'}
-    # data_storing.store_dict_into_mongodb(costants.CLUSTER_NAME, costants.DATABASE_NAME, costants.COLLECTION_PRODUCTS, data_dict)
+
     query_condition = {'code': message_string}
     data = data_acquisition.get_from_products(condition_product=query_condition)
     name, price = data_acquisition.get_product_info(data=data)
@@ -157,7 +155,6 @@ def print_incoming_message(client, userdata, message):
     """
     print(f"Topic: {message.topic}")
     print(f"Message: {message.payload}\n")
-    #print(f"User data: {userdata}")
 
 
 

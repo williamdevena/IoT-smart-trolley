@@ -10,17 +10,10 @@ from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
 from src import auth, costants, data_acquisition, data_storing, mqtt_comm
 
 
-def main():
+def main() -> None:
     """
     Turns on the back end of the project
     """
-
-
-    # logging.basicConfig(
-    #     level=logging.INFO,
-    #     format="%(message)s",
-    # )
-
     client_id = "back-end"
     endpoint = "a1o1h9paav6wpy-ats.iot.eu-west-2.amazonaws.com"
     port = 8883

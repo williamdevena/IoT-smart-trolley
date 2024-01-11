@@ -30,7 +30,6 @@ def get_product_info(data):
         - price (float): price of the product
 
     """
-    print(data)
     product = data[0]
     name = product['name']
     price = float(product['price'])
@@ -83,7 +82,7 @@ def acquire_from_database():
             cluster_name=costants.CLUSTER_NAME, database_name=database,
             collection_name=collection
         )
-        #print(collection_data)
+
         for doc in collection_data:
             data.append(doc)
 
@@ -112,8 +111,6 @@ def read_mongodb_collection(cluster_name, database_name, collection_name, condit
         cluster_name, auth.MONGODB_USERNAME, auth.MONGODB_PASSWORD)
     database = data_storing.connect_database(client, database_name)
     collection = data_storing.connect_collection(database, collection_name)[0]
-    # logging.info(
-    #     f"\n- Reading the '{collection_name}' collection in the '{database_name}' database")
 
     return collection.find(condition, projection)
 

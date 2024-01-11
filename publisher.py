@@ -9,15 +9,10 @@ from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
 from src import costants, data_acquisition, data_storing, mqtt_comm
 
 
-def main():
+def main() -> None:
     """
     Turns on the back end of the project
     """
-    # logging.basicConfig(
-    #     level=logging.INFO,
-    #     format="%(message)s",
-    # )
-
     client_id = "back-end"
     endpoint = "a1o1h9paav6wpy-ats.iot.eu-west-2.amazonaws.com"
     port = 8883
@@ -36,7 +31,7 @@ def main():
                                         certificate_path=certificate_path)
     mqtt_comm.connect_client(client=client)
 
-    message = "hellooooooo"
+    message = "test message"
     mqtt_comm.publish_periodically(client, topic=incoming_topic, message="ciao", period=100, time_sleep=2)
     #mqtt_comm.publish_on_topic(client, incoming_topic, message)
 
