@@ -1,7 +1,7 @@
 # IoT Smart Shopping Trolley
 
 ## Overview
-The IoT Smart Shopping Trolley is an innovative solution designed to revolutionize the shopping experience. This project aims to streamline the shopping process by integrating IoT technology into a shopping trolley, thereby eliminating the need for manual item scanning and reducing checkout wait times.
+The IoT Smart Shopping Trolley is the prototype of an innovative solution designed to revolutionize the shopping experience. This project aims to streamline the shopping process by integrating IoT technology into a shopping trolley, thereby eliminating the need for manual item scanning and reducing checkout wait times.
 
 ## Features
 - **Automated Item Scanning**: As items are added to the trolley, they are automatically scanned and recorded.
