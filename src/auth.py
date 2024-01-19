@@ -2,7 +2,7 @@
 Contains credentials for the MongoDB database and BLS API
 """
 
-MONGODB_USERNAME = "newuserhello"
-MONGODB_PASSWORD = "IoTproject"
+MONGODB_USERNAME = "#####"
+MONGODB_PASSWORD = "#####"
 
 
